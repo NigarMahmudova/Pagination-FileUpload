@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PustokBookStore.Entities
 {
@@ -15,9 +16,10 @@ namespace PustokBookStore.Entities
         public string BtnText { get; set; }
         [MaxLength(150)]
         public string BtnUrl { get; set; }
-        [Required]
-        [MaxLength(150)]
+        [MaxLength(100)]
         public string ImageName { get; set; }
         public int Order { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
     }
 }

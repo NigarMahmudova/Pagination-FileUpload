@@ -211,9 +211,8 @@ namespace PustokBookStore.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("ImageName")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Order")
                         .HasColumnType("int");
@@ -252,13 +251,13 @@ namespace PustokBookStore.Migrations
             modelBuilder.Entity("PustokBookStore.Entities.Book", b =>
                 {
                     b.HasOne("PustokBookStore.Entities.Author", "Author")
-                        .WithMany()
+                        .WithMany("Books")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PustokBookStore.Entities.Genre", "Genre")
-                        .WithMany()
+                        .WithMany("Books")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -296,11 +295,21 @@ namespace PustokBookStore.Migrations
                     b.Navigation("Tag");
                 });
 
+            modelBuilder.Entity("PustokBookStore.Entities.Author", b =>
+                {
+                    b.Navigation("Books");
+                });
+
             modelBuilder.Entity("PustokBookStore.Entities.Book", b =>
                 {
                     b.Navigation("BookImages");
 
                     b.Navigation("BookTags");
+                });
+
+            modelBuilder.Entity("PustokBookStore.Entities.Genre", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("PustokBookStore.Entities.Tag", b =>
